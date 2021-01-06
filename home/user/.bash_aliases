@@ -1,4 +1,3 @@
-HISTSIZE=5000
 
 #### GIT aliases
 alias gst='git status'

@@ -1,16 +1,6 @@
 new_line='\n'
 bold='\e[1m';
 reset="\e[0m";
-black="\e[30m";
-blue="\e[34m";
-cyan="\e[36m";
-green="\e[32m";
-orange="\e[33m";
-purple="\e[35m";
-red="\e[31m";
-violet="\e[35m";
-white="\e[37m";
-yellow="\e[33m";
 
 
 ######## Prompt ########
@@ -48,55 +38,55 @@ function prompt_status(){
 }
 
 function use_prompt(){
-    PS1="\$(prompt_status \"\[${green}\]\" \"\[${red}\]\")"; # Git repository details and $
+    PS1="\$(prompt_status \"\[${GREEN}\]\" \"\[${LIGHT_RED}\]\")"; # Git repository details and $
     PS1+="\[${reset}\] ";
 }
 
 function use_simple_prompt(){
    PS1="\[\#\] "
-   PS1+="\[${bold}${blue}\]\u"
+   PS1+="\[${bold}${BLUE}\]\u"
    PS1+="\[${reset}\]@"
    PS1+="\[${yellow}\]\h"
-   PS1+="\$(prompt_status \"\[${green}\]\" \"\[${red}\]\")"; # Git repository details and $
+   PS1+="\$(prompt_status \"\[${GREEN}\]\" \"\[${LIGHT_RED}\]\")"; # Git repository details and $
    PS1+="\[${reset}\] ";
 }
 
 function use_the_simpliest_prompt(){
     # Set the terminal title to the current working directory.
-    PS1="\[${cyan}\#\] ";
+    PS1="\[${CYAN}\#\] ";
     PS1+="\[${yellow}\]\W/\] "; # working directory base name
-    PS1+="\$(prompt_status \"\[${green}\]\" \"\[${red}\]\" \"${new_line}\")"; # Git repository details and $
+    PS1+="\$(prompt_status \"\[${GREEN}\]\" \"\[${LIGHT_RED}\]\" \"${new_line}\")"; # Git repository details and $
     PS1+=" \[${reset}\]"; # and reset color
 }
 
 function use_the_simpliest_prompt_with_git(){
     # Set the terminal title to the current working directory.
-    PS1="\[${cyan}\#\] ";
+    PS1="\[${CYAN}\#\] ";
     PS1+="\[${yellow}\]\W/\] "; # working directory base name
-    PS1+="\$(prompt_git_and_status \"\[${white}\] on \[${violet}\]\" \"\[${blue}\]\" \"\[${green}\]\" \"\[${red}\]\")"; # Git repository details and $    
+    PS1+="\$(prompt_git_and_status \"\[${WHITE}\] on \[${YELLOWBOLD}\]\" \"\[${LIGHT_RED}\]\" \"\[${GREEN}\]\" \"\[${LIGHT_RED}\]\")"; # Git repository details and $    
     PS1+=" \[${reset}\]"; # and reset color
 }
 
 function use_normal_user_prompt(){
     PS1="\[\#\] ";
     PS1+="\[${bold}\]";
-    PS1+="\[${cyan}\]\u"; # username
-    PS1+="\[${white}\]@";
-    PS1+="\[${red}\]\h"; # host
-    PS1+="\[${white}\]:";
-    PS1+="\[${green}\] \w"; # working directory full path
-    PS1+="\[${cyan}\]\n\\$"
+    PS1+="\[${CYAN}\]\u"; # username
+    PS1+="\[${WHITE}\]@";
+    PS1+="\[${LIGHT_RED}\]\h"; # host
+    PS1+="\[${WHITE}\]:";
+    PS1+="\[${GREEN}\] \w"; # working directory full path
+    PS1+="\[${CYAN}\]\n\\$"
     PS1+=" \[${reset}\]"; # and reset color
 }
 
 function use_normal_user_prompt_with_git(){
     PS1="\[\#\] ";
-    PS1+="\[${cyan}\]\u"; # username
-    PS1+="\[${white}\]@";
-    PS1+="\[${red}\]\h"; # host
-    PS1+="\[${white}\]:";
-    PS1+="\[${green}\]\w"; # working directory full path
-    PS1+="\$(prompt_git_and_status \"\[${white}\] on \[${violet}\]\" \"\[${blue}\]\" \"\[${cyan}\]\" \"\[${red}\]\")"; # Git repository details and $
+    PS1+="\[${CYAN}\]\u"; # username
+    PS1+="\[${WHITE}\]@";
+    PS1+="\[${LIGHT_RED}\]\h"; # host
+    PS1+="\[${WHITE}\]:";
+    PS1+="\[${GREEN}\]\w"; # working directory full path
+    PS1+="\$(prompt_git_and_status \"\[${WHITE}\] on \[${YELLOWBOLD}\]\" \"\[${LIGHT_RED}\]\" \"\[${CYAN}\]\" \"\[${LIGHT_RED}\]\")"; # Git repository details and $
     PS1+=" \[${reset}\]"; # and reset color
 }
 
@@ -109,3 +99,5 @@ then
    # use_normal_user_prompt
    use_normal_user_prompt_with_git
 fi
+export PS1
+export PS2="\001${CYANBOLD}\002  ...:\001$RESET\002 "

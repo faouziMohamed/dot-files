@@ -16,8 +16,7 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=9000
-HISTFILESIZE=3000
+
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -129,6 +128,11 @@ if [ -f ~/.bash_user_prompt ]; then
     . ~/.bash_user_prompt
 fi
 
+if [ -f ~/.global_config ]; then
+    . ~/.global_config
+fi
+
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/home/faouzi/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
@@ -143,13 +147,3 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
-# Thank byobu for these ones. Man pages now look pretty awesome
-export GREP_COLORS="ms=01;38;5;202:mc=01;31:sl=:cx=:fn=01;38;5;132:ln=32:bn=32:se=00;38;5;242"
-export LESS_TERMCAP_mb=$(printf '\e[01;31m \e[1;180;32m')       # enter blinking mode – red
-export LESS_TERMCAP_md=$(printf '\e[01;92;180m') # enter double-bright mode – bold light orange
-export LESS_TERMCAP_me=$(printf '\e[0m')           # turn off all appearance modes (mb, md, so, us)
-export LESS_TERMCAP_se=$(printf '\e[0m')           # leave standout mode
-export LESS_TERMCAP_so=$(printf '\e[03;38;5;202m') # enter standout mode – orange background highlight (or italics)
-export LESS_TERMCAP_ue=$(printf '\e[0m')           # leave underline mode
-export LESS_TERMCAP_us=$(printf '\e[04;38;5;139m') # enter underline mode – underline aubergine
