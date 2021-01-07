@@ -1,4 +1,4 @@
-# CUSTOM BASH COLOR PROMPT
+# CUSTOM BASH COLOR
 # 30m - Black
 # 31m - Red
 # 32m - Green
@@ -18,6 +18,8 @@
 # 0 - Normal
 # 1 - Bold
 
+export RESET="\033[0m"
+
 # Foreground
 export BLACK="\[\033[0;30m\]"
 export BLACKBOLD="\[\033[1;30m\]"
@@ -35,7 +37,6 @@ export CYAN="\[\033[0;36m\]"
 export CYANBOLD="\[\033[1;36m\]"
 export WHITE="\[\033[0;37m\]"
 export WHITEBOLD="\[\033[1;37m\]"
-export RESET="\033[0m"
 export LIGHT_RED="\[\e[91m\]"
 export ORANGE="\[\e[38;5;208m\]"
 # Different shade
