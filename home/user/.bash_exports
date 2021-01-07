@@ -1,3 +1,4 @@
+#
 # -J: displays a status column at the left edge of the screen
 # -R: is what we need for ansi colors
 # -K: exit less in response to Ctrl-C
@@ -35,3 +36,10 @@ export LESS_TERMCAP_so=$(printf '\e[03;38;5;215m') # enter standout mode – ora
 export LESS_TERMCAP_ue=$(printf '\e[0m')           # leave underline mode
 export LESS_TERMCAP_us=$(printf '\e[04;38;5;149m') # enter underline mode – underline aubergine
 
+# colored GCC warnings and errors
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01';
+
+
+# set PATH so it includes user's private bin if it exists
+[ -d "$HOME/bin" ]        && export PATH="$HOME/bin:$PATH";
+[ -d "$HOME/.local/bin" ] && export PATH="$HOME/.local/bin:$PATH";

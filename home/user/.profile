@@ -1,27 +1,23 @@
-# ~/.profile: executed by the command interpreter for login shells.
-# This file is not read by bash(1), if ~/.bash_profile or ~/.bash_login
-# exists.
-# see /usr/share/doc/bash/examples/startup-files for examples.
-# the files are located in the bash-doc package.
 
-# the default umask is set in /etc/profile; for setting the umask
-# for ssh logins, install and configure the libpam-umask package.
-#umask 022
+[ -f ~/.bash_config ]&& source ~/.bash_config;
 
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
-fi
+for file in ~/.{color,bash_aliases,bash_functions,bash_user_prompt,extra}; 
+do
+    [ -r "$file" ] && [ -f "$file" ] && source "$file";
+done;
+unset file;
 
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$HOME/.local/bin:$PATH"
-fi
-
-# if running bash
-if [ -n "$BASH_VERSION" ]; then
-    # include .bashrc if it exists
-    if [ -f "$HOME/.bashrc" ]; then
-    . "$HOME/.bashrc"
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/faouzi/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/faouzi/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/faouzi/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/faouzi/anaconda3/bin:$PATH"
     fi
 fi
+unset __conda_setup
+# <<< conda initialize <<<
