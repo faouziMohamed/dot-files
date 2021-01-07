@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+
 function ex() {
   if [ -f $1 ] ; then
     case "$1" in
