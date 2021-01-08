@@ -33,11 +33,11 @@ function prompt_git() {
 
         # Check for uncommitted changes in the index.
         if ! $(git diff --quiet --ignore-submodules --cached); then
-            __count_print+="${CYANBOLD}+ "
             __stats+="${CYANBOLD}+"
+            __count_print+="${CYANBOLD}+ "
         fi
         # Check for unstaged changes.
-        if ! $(git diff-files --quiet --ignore-submodules --); then
+        if ! $(git diff-files --quiet --ignore-submodules); then
             __number_of_unstaged="$(git ls-files --modified | wc -l)"
             __count_print+="${BOLD}${LIGHT_RED}${__number_of_unstaged} "
             __stats+="${BOLD}${LIGHT_RED}!"
@@ -50,6 +50,7 @@ function prompt_git() {
         fi
         # Check for stashed files.
         if $(git rev-parse --verify refs/stash &> /dev/null); then
+            printf 'kk'
             __number_of_stashed_files=$(git stash show | tail -1 | cut -f2 -d ' ')
             __count_print+="${BOLD}${BROWN}${__number_of_stashed_files} "
             __stats+="${BOLD}${BROWN}$"
