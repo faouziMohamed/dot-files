@@ -1,12 +1,14 @@
+
 [ -f ~/.bash_config ]&& source ~/.bash_config;
 
-for file in ~/.{color,bash_aliases,bash_functions,bash_user_prompt,bash_exports};
+
+for file in ~/.{color,bash_aliases,bash_functions,bash_root_prompt,bash_exports}; 
 do
     [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
 
-# >>>  conda initialize >>>
+# >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/home/faouzi/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then

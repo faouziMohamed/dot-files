@@ -1,0 +1,77 @@
+# CUSTOM BASH COLOR
+# 30m - Black
+# 31m - Red
+# 32m - Green
+# 33m - Yellow
+# 34m - Blue
+# 35m - Purple
+# 36m - Cyan
+# 37m - White
+# 40m - Background Black
+# 41m - Background Red
+# 42m - Background Green
+# 43m - Background Yellow
+# 44m - Background Blue
+# 45m - Background Purple
+# 46m - Background Cyan
+# 47m - Background White
+# 0 - Normal
+# 1 - Bold
+
+export RESET="\033[0m"
+export BOLD="\033[1m"
+
+# Foreground
+export BLACK="\033[0;30m"
+export BLACKBOLD="\033[1;30m"
+export RED="\033[0;31m"
+export REDBOLD="\033[1;31m"
+export GREEN="\033[0;32m"
+export LIGHTGREENBOLD="\033[1;32m"
+export YELLOW="\033[0;33m"
+export YELLOWBOLD="\033[1;33m"
+export BLUE="\033[0;34m"
+export BLUEBOLD="\033[1;34m"
+export PURPLE="\033[0;35m"
+export PURPLEBOLD="\033[1;35m"
+export CYAN="\033[0;36m"
+export CYANBOLD="\033[1;36m"
+export WHITE="\033[0;37m"
+export WHITEBOLD="\033[1;37m"
+export GRAY="\033[2;37m"
+export GRAYBOLD="\033[1;2;37m"
+export LIGHT_RED="\e[91m"
+export LIGHT_REDBOLD="\e[1;91m"
+export ORANGE="\e[38;5;208m"
+export ORANGEBOLD="\e[1;38;5;208m"
+# Different shade
+export yellow="\e[38;5;214m"
+export GREEN="\e[38;5;71m"
+export GREENBOLD="\e[1;38;5;71m"
+export LIGHTBLUEBOLD="\e[1;38;5;74m"
+export SOFT_GRAY="\e[1;38;5;109m"
+export UGREEN="\e[38;5;71;1;4m"
+export SALMON="\e[38;5;167m"
+export SALMONBOLD="\e[1;38;5;168m"
+export BROWN="\e[38;5;166m"
+export BROWNBOLD="\e[1;38;5;166m"
+export SIMPLERED="\e[1;38;5;168m"
+
+
+# Background
+export BGBLACK="\033[0;40m"
+export BGBLACKBOLD="\033[1;40m"
+export BGRED="\033[0;41m"
+export BGREDBOLD="\033[1;41m"
+export BGGREEN="\033[0;42m"
+export BGGREENBOLD="\033[1;42m"
+export BGYELLOW="\033[0;43m"
+export BGYELLOWBOLD="\033[1;43m"
+export BGBLUE="\033[0;44m"
+export BGBLUEBOLD="\033[1;44m"
+export BGPURPLE="\033[0;45m"
+export BGPURPLEBOLD="\033[1;45m"
+export BGCYAN="\033[0;46m"
+export BGCYANBOLD="\033[1;46m"
+export BGWHITE="\033[0;47m"
+export BGWHITEBOLD="\033[1;47m"

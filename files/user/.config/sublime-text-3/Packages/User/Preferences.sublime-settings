@@ -1,0 +1,21 @@
+{
+	"allow_git_home_dir": true,
+	"color_scheme": "Packages/Color Scheme - Default/Monokai.sublime-color-scheme",
+	"ensure_newline_at_eof_on_save": true,
+	"font_size": 9,
+	"highlight_line": true,
+	"highlight_modified_tabs": true,
+	"ignored_packages":
+	[
+	],
+	"rulers":
+	[
+		80,
+		120
+	],
+	"shift_tab_unindent": true,
+	"show_encoding": false,
+	"show_line_endings": false,
+	"theme": "Adaptive.sublime-theme",
+	"translate_tabs_to_spaces": true
+}
