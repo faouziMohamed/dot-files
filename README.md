@@ -1,11 +1,13 @@
 # Dot-files (.*)  
 
  <p align='left'>
+  <a href='https://github.com/faouziMohamed/Dot-files/pulls'>
      <img src='https://img.shields.io/badge/Pull%20request-Welcome-96ff00.svg?&style=for-the-badge' alt='pr badge'>
+  </a>
  </p>  
 
 My personal dot-files in Ubuntu and WSL(on windows)  
-<p align="'left">
+<p align="left">
     <img src='images/preview.png' alt='Preview with git status' height='400'>
 </p>   
 
@@ -45,7 +47,7 @@ set -- -f; source bootstrap.sh
 
 ## License
 
-This repository is under MIT license
+This repository is under [MIT](LICENCE) license
 
 ### Feedback 
 
