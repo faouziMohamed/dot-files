@@ -43,13 +43,19 @@ export GRAYBOLD="\033[1;2;37m"
 export LIGHT_RED="\e[91m"
 export LIGHT_REDBOLD="\e[1;91m"
 export ORANGE="\e[38;5;208m"
+export ORANGEBOLD="\e[1;38;5;208m"
 # Different shade
 export yellow="\e[38;5;214m"
 export GREEN="\e[38;5;71m"
 export GREENBOLD="\e[1;38;5;71m"
+export LIGHTBLUEBOLD="\e[1;38;5;74m"
+export SOFT_GRAY="\e[1;38;5;109m"
 export UGREEN="\e[38;5;71;1;4m"
 export SALMON="\e[38;5;167m"
+export SALMONBOLD="\e[1;38;5;168m"
 export BROWN="\e[38;5;166m"
+export BROWNBOLD="\e[1;38;5;166m"
+export SIMPLERED="\e[1;38;5;168m"
 
 
 # Background

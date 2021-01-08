@@ -4,7 +4,7 @@ bold='\e[1m';
 reset="\e[0m";
 
 # Based on https://github.com/mathiasbynens/dotfiles/blob/main/.bash_prompt
-prompt_git() {
+function prompt_git() {
 
     local ps1_exit=$?
     if [ $ps1_exit -eq 0 ]; then
@@ -132,7 +132,7 @@ function use_normal_user_prompt_with_git(){
     PS1+="\[${GRAYBOLD}\] at ";
     PS1+="\[${RESET}\]";
     PS1+="\[${BOLD}${LIGHT_RED}\]\h"; # host
-    PS1+="\[${GRAYBOLD}\] in ";
+    PS1+="\[${GRAYBOLD}\]:";
     PS1+="\[${RESET}\]";
     PS1+="\[${GREENBOLD}\]\w"; # working directory full path
     PS1+="\$(prompt_git \"\[${WHITEBOLD}\] on \[${YELLOWBOLD}\]\" \"\[${LIGHT_REDBOLD}\]\" \"\[${GREEN}\]\" \"\[${LIGHT_RED}\]\")"; # Git repository details and $
