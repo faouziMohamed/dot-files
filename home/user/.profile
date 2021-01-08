@@ -1,7 +1,8 @@
 
 [ -f ~/.bash_config ]&& source ~/.bash_config;
 
-for file in ~/.{color,bash_aliases,bash_functions,bash_user_prompt,extra}; 
+
+for file in ~/.{color,bash_aliases,bash_functions,bash_user_prompt,bash_exports}; 
 do
     [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
