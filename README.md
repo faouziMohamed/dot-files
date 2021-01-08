@@ -47,7 +47,7 @@ set -- -f; source bootstrap.sh
 
 ## License
 
-This repository is under [MIT](LICENCE) license
+This repository is under [MIT](LICENSE) license
 
 ### Feedback 
 
