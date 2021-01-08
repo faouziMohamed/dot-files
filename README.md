@@ -2,14 +2,12 @@
 
  <p align='left'>
      <img src='https://img.shields.io/badge/Pull%20request-Welcome-96ff00.svg?&style=for-the-badge' alt='pr badge'>
- </p>
-
-
+ </p>  
 
 My personal dot-files in Ubuntu and WSL(on windows)  
 <p align="'left">
     <img src='images/preview.png' alt='Preview with git status' height='400'>
-</p>
+</p>   
 
 ## Installation
 
@@ -28,23 +26,22 @@ sudo apt install rsync
 
 Clone the repository wherever you want or download the repository in zip format.
 
-  ```bash
-  git clone git@github.com:faouziMohamed/Dot-files.git
-  # Or
-  git clone https://github.com/faouziMohamed/Dot-files.git
-  ```
-  ```bash
-  cd Dot-files
-  chmod +x bootstrap.sh
-  source bootstrap.sh
-  ```
+```bash
+git clone git@github.com:faouziMohamed/Dot-files.git
+# Or
+git clone https://github.com/faouziMohamed/Dot-files.git
+```
+```bash
+cd Dot-files
+chmod +x bootstrap.sh
+source bootstrap.sh
+```
 
+Alternatively, to update while avoiding the confirmation prompt:
 
-  Alternatively, to update while avoiding the confirmation prompt:
-
-  ```bash
-  set -- -f; source bootstrap.sh
-  ```
+```bash
+set -- -f; source bootstrap.sh
+```
 
 ## License
 
