@@ -16,7 +16,7 @@ My personal dot-files in Ubuntu and WSL(on windows)
 **Warning:** If you want to give these dot-files a try, ***you  should first fork this repository, review the code, and remove things  you don’t want or need***. Don’t blindly use my settings unless you know  what that entails. Use at your own risk!
 
 * You can clone the repository wherever you want.
-* The bootstrapper script will pull in the latest version and copy the files to your home folder. using `rsync`
+* The bootstrapper script will pull in the latest version and copy the files to your home folder using `rsync` command.
 
 Before install make sure that `rsync` is installed : 
 
@@ -53,6 +53,6 @@ This repository is under [MIT](LICENSE) license
 
 Suggestions and improvements are [welcome](https://github.com/faouziMohamed/Dot-files/issues)
 
-### Thanks to
+### Thanks to...
 
-* Especially [Mathisbynens](https://github.com/mathiasbynens/dotfiles) dot-files repo and many others.
+* Especially for [Mathisbynens](https://github.com/mathiasbynens/dotfiles)'s dot-files repo and many others.
