@@ -1,152 +1,128 @@
-
 new_line='\n'
-bold='\e[1m';
-reset="\e[0m";
+bold='\e[1m'
+reset="\e[0m"
 
 # Based on https://github.com/mathiasbynens/dotfiles/blob/main/.bash_prompt
 function prompt_git() {
+  local ps1_exit=$?
+  if [ $ps1_exit -eq 0 ]; then
+    ps1_status="${3}"
+  else
+    ps1_status="${4}"
+  fi
 
-    local ps1_exit=$?
-    if [ $ps1_exit -eq 0 ]; then
-        ps1_status="${3}"
-    else
-        ps1_status="${4}"
+  local s=''
+  local branchName=''
+
+  # Check if the current directory is in a Git repository.
+  isIn_A_gitRepo=$(
+    git rev-parse --is-inside-work-tree &>/dev/null
+    echo "${?}"
+  )
+  if [ "${isIn_A_gitRepo}" == '0' ]; then
+    branchName="$(git symbolic-ref --quiet --short HEAD 2>/dev/null ||
+      git describe --all --exact-match HEAD 2>/dev/null ||
+      git rev-parse --short HEAD 2>/dev/null ||
+      echo '(unknown)')"
+
+    # Check for uncommitted changes in the index.
+    if ! $(git diff --quiet --ignore-submodules --cached); then s+="${CYANBOLD}+"; fi
+    # Check for unstaged changes.
+    if ! $(git diff-files --quiet --ignore-submodules --); then
+      __number_of_unstaged="$(git ls-files --modified | wc -l)"
+      s+="${BOLD}${LIGHT_RED}!(${__number_of_unstaged})"
+    fi
+    # Check for untracked files.
+    if [ -n "$(git ls-files --others --exclude-standard)" ]; then
+      __number_of_untracked="$(git ls-files --others --exclude-standard | wc -l)"
+      s+="${BOLD}${SALMON}?(${__number_of_untracked})"
+    fi
+    # Check for stashed files.
+    if $(git rev-parse --verify refs/stash &>/dev/null); then
+      s+="${BOLD}${BROWN}$"
     fi
 
-    local s='';
-    local branchName='';
+    [ -n "${s}" ] && s=" ${WHITEBOLD}[${s}${WHITEBOLD}]"
 
-    # Check if the current directory is in a Git repository.
-    isIn_A_gitRepo=$(git rev-parse --is-inside-work-tree &>/dev/null; echo "${?}")
-    if [ "${isIn_A_gitRepo}" == '0' ]; 
-    then
-        branchName="$(git symbolic-ref --quiet --short HEAD 2> /dev/null || \
-            git describe --all --exact-match HEAD 2> /dev/null || \
-            git rev-parse --short HEAD 2> /dev/null || \
-            echo '(unknown)')";
-
-        # Check for uncommitted changes in the index.
-        if ! $(git diff --quiet --ignore-submodules --cached); then
-            s+="${CYANBOLD}+";
-        fi;
-        # Check for unstaged changes.
-        if ! $(git diff-files --quiet --ignore-submodules --); then
-            s+="${BOLD}${LIGHT_RED}!";
-        fi;
-        # Check for untracked files.
-        if [ -n "$(git ls-files --others --exclude-standard)" ]; then
-            s+="${BOLD}${SALMON}?";
-        fi;
-        # Check for stashed files.
-        if $(git rev-parse --verify refs/stash &>/dev/null); then
-            s+="${BOLD}${BROWN}$";
-        fi;
-
-        [ -n "${s}" ] && s=" ${WHITEBOLD}[${s}${WHITEBOLD}]";
-
-        echo -en "${1}${branchName}${2}${s}${RESET}";
-    fi
-    printf "\n%s" "${ps1_status}\$"
+    echo -en "${1}${branchName}${2}${s}${RESET}"
+  fi
+  printf "\n%s" "${ps1_status}\$"
 }
 
+function prompt_status() {
+  local ps1_exit=$?
 
-######## Prompt ########
-prompt_git_and_status() 
-{
-    local ps1_exit=$?
-    local branch_name='';
-
-    if [ $ps1_exit -eq 0 ]; then
-        ps1_status="${3}"
-    else
-        ps1_status="${4}"
-    fi
-
-    # Check if the current directory is in a Git repository.
-    if [ $(git rev-parse --is-inside-work-tree &>/dev/null; echo "${?}") == '0' ]; then
-        dirty=$(git diff --quiet --ignore-submodules HEAD &>/dev/null; [ $? -eq 1 ]&& echo -e "*")
-        branch_name=$(git symbolic-ref -q --short HEAD)
-
-        printf "%s" "${1}${branch_name}${2}${dirty} "
-    fi;
-    printf "\n%s" "${ps1_status}\$"
+  if [ $ps1_exit -eq 0 ]; then
+    ps1_status="${1}"
+  else
+    ps1_status="${2}"
+  fi
+  printf "${3}%s" "${ps1_status}\$"
 }
 
-function prompt_status(){
-    local ps1_exit=$?
-
-    if [ $ps1_exit -eq 0 ]; then
-        ps1_status="${1}"
-    else
-        ps1_status="${2}"
-    fi
-    printf "${3}%s" "${ps1_status}\$"
+function use_prompt() {
+  PS1="\$(prompt_status \"\[${GREEN}\]\" \"\[${LIGHT_RED}\]\")" # Git repository details and $
+  PS1+="\[${reset}\] "
 }
 
-function use_prompt(){
-    PS1="\$(prompt_status \"\[${GREEN}\]\" \"\[${LIGHT_RED}\]\")"; # Git repository details and $
-    PS1+="\[${reset}\] ";
+function use_simple_prompt() {
+  PS1="\[\#\] "
+  PS1+="\[${bold}${BLUE}\]\u"
+  PS1+="\[${reset}\]@"
+  PS1+="\[${yellow}\]\h"
+  PS1+="\$(prompt_status \"\[${GREEN}\]\" \"\[${LIGHT_RED}\]\")" # Git repository details and $
+  PS1+="\[${reset}\] "
 }
 
-function use_simple_prompt(){
-   PS1="\[\#\] "
-   PS1+="\[${bold}${BLUE}\]\u"
-   PS1+="\[${reset}\]@"
-   PS1+="\[${yellow}\]\h"
-   PS1+="\$(prompt_status \"\[${GREEN}\]\" \"\[${LIGHT_RED}\]\")"; # Git repository details and $
-   PS1+="\[${reset}\] ";
+function use_the_simpliest_prompt() {
+  # Set the terminal title to the current working directory.
+  PS1="\[${CYAN}\#\] "
+  PS1+="\[${yellow}\]\W/\] "                                                     # working directory base name
+  PS1+="\$(prompt_status \"\[${GREEN}\]\" \"\[${LIGHT_RED}\]\" \"${new_line}\")" # Git repository details and $
+  PS1+=" \[${reset}\]"                                                           # and reset color
 }
 
-function use_the_simpliest_prompt(){
-    # Set the terminal title to the current working directory.
-    PS1="\[${CYAN}\#\] ";
-    PS1+="\[${yellow}\]\W/\] "; # working directory base name
-    PS1+="\$(prompt_status \"\[${GREEN}\]\" \"\[${LIGHT_RED}\]\" \"${new_line}\")"; # Git repository details and $
-    PS1+=" \[${reset}\]"; # and reset color
+function use_the_simpliest_prompt_with_git() {
+  # Set the terminal title to the current working directory.
+  PS1="\[${CYAN}\#\] "
+  PS1+="\[${yellow}\]\W/\] "                                                                                                     # working directory base name
+  PS1+="\$(prompt_git \"\[${WHITEBOLD}\] on \[${YELLOWBOLD}\]\" \"\[${LIGHT_REDBOLD}\]\" \"\[${GREEN}\]\" \"\[${LIGHT_RED}\]\")" # Git repository details and $
+  PS1+=" \[${reset}\]"                                                                                                           # and reset color
 }
 
-function use_the_simpliest_prompt_with_git(){
-    # Set the terminal title to the current working directory.
-    PS1="\[${CYAN}\#\] ";
-    PS1+="\[${yellow}\]\W/\] "; # working directory base name
-    PS1+="\$(prompt_git \"\[${WHITEBOLD}\] on \[${YELLOWBOLD}\]\" \"\[${LIGHT_REDBOLD}\]\" \"\[${GREEN}\]\" \"\[${LIGHT_RED}\]\")"; # Git repository details and $    
-    PS1+=" \[${reset}\]"; # and reset color
+function use_normal_user_prompt() {
+  PS1="\[\#\] "
+  PS1+="\[${bold}\]"
+  PS1+="\[${CYAN}\]\u" # username
+  PS1+="\[${WHITE}\]@"
+  PS1+="\[${LIGHT_RED}\]\h" # host
+  PS1+="\[${WHITE}\]:"
+  PS1+="\[${GREEN}\] \w" # working directory full path
+  PS1+="\[${CYAN}\]\n\\$"
+  PS1+=" \[${reset}\]" # and reset color
 }
 
-function use_normal_user_prompt(){
-    PS1="\[\#\] ";
-    PS1+="\[${bold}\]";
-    PS1+="\[${CYAN}\]\u"; # username
-    PS1+="\[${WHITE}\]@";
-    PS1+="\[${LIGHT_RED}\]\h"; # host
-    PS1+="\[${WHITE}\]:";
-    PS1+="\[${GREEN}\] \w"; # working directory full path
-    PS1+="\[${CYAN}\]\n\\$"
-    PS1+=" \[${reset}\]"; # and reset color
+function use_normal_user_prompt_with_git() {
+  PS1="\[${WHITEBOLD}\]"
+  PS1+="[\#] "
+  PS1+="\[${CYANBOLD}\]\u" # username
+  PS1+="\[${GRAYBOLD}\] at "
+  PS1+="\[${RESET}\]"
+  PS1+="\[${BOLD}${LIGHT_RED}\]\h" # host
+  PS1+="\[${GRAYBOLD}\]:"
+  PS1+="\[${RESET}\]"
+  PS1+="\[${GREENBOLD}\]\w"                                                                                                      # working directory full path
+  PS1+="\$(prompt_git \"\[${WHITEBOLD}\] on \[${YELLOWBOLD}\]\" \"\[${LIGHT_REDBOLD}\]\" \"\[${GREEN}\]\" \"\[${LIGHT_RED}\]\")" # Git repository details and $
+  PS1+="\[${RESET}\] "                                                                                                           # and reset color
 }
 
-function use_normal_user_prompt_with_git(){
-    PS1="\[${WHITEBOLD}\]"
-    PS1+="[\#] ";
-    PS1+="\[${CYANBOLD}\]\u"; # username
-    PS1+="\[${GRAYBOLD}\] at ";
-    PS1+="\[${RESET}\]";
-    PS1+="\[${BOLD}${LIGHT_RED}\]\h"; # host
-    PS1+="\[${GRAYBOLD}\]:";
-    PS1+="\[${RESET}\]";
-    PS1+="\[${GREENBOLD}\]\w"; # working directory full path
-    PS1+="\$(prompt_git \"\[${WHITEBOLD}\] on \[${YELLOWBOLD}\]\" \"\[${LIGHT_REDBOLD}\]\" \"\[${GREEN}\]\" \"\[${LIGHT_RED}\]\")"; # Git repository details and $
-    PS1+="\[${RESET}\] "; # and reset color
-}
-
-if [ "$UID" -ge 0 ]
-then 
-   # use_prompt
-   # use_simple_prompt
-   # use_the_simpliest_prompt
-   # use_the_simpliest_prompt_with_git
-   # use_normal_user_prompt
-   use_normal_user_prompt_with_git
+if [ "$UID" -ge 0 ]; then
+  # use_prompt
+  # use_simple_prompt
+  # use_the_simpliest_prompt
+  # use_the_simpliest_prompt_with_git
+  # use_normal_user_prompt
+  use_normal_user_prompt_with_git
 fi
 export PS1
 export PS2="\001${CYANBOLD}\002  ...:\001$RESET\002 "

@@ -50,9 +50,8 @@ alias lS="ls -lS"
 
 # grep
 alias grep='grep --color=always'
-alias fgrep='fgrep --color=always'
-alias egrep='egrep --color=always'
-alias grep="grep --color=always"
+alias fgrep='grep -F --color=always'
+alias egrep='grep -E --color=always'
 alias igrep="grep -i"
 
 # Shell

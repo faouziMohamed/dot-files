@@ -1,4 +1,3 @@
-
 [ -f ~/.bash_config ]&& source ~/.bash_config;
 
 for file in ~/.{color,bash_aliases,bash_functions,bash_user_prompt,bash_exports}; 
