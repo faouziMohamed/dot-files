@@ -46,7 +46,7 @@ export ORANGE="\e[38;5;208m"
 # Different shade
 export yellow="\e[38;5;214m"
 export GREEN="\e[38;5;71m"
-export GREENBOLD="\e[38;5;71m"
+export GREENBOLD="\e[1;38;5;71m"
 export UGREEN="\e[38;5;71;1;4m"
 export SALMON="\e[38;5;167m"
 export BROWN="\e[38;5;166m"
