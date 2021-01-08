@@ -1,8 +1,5 @@
-#.bash_fonctions
 
-##### FONCTIONS #####
-ex () 
-{
+function ex() {
   if [ -f $1 ] ; then
     case "$1" in
       *.tar.bz2)   tar xjf $1   ;;
@@ -16,15 +13,31 @@ ex ()
       *.zip)       unzip $1     ;;
       *.Z)         uncompress $1;;
       *.7z)        7z x $1      ;;
-      *)           echo "'$1' ne peut etre extrait par ex()" ;;
+      *)           echo "'$1' cannot be extracted via >ex<" ;;
     esac
   else
-    echo "'$1' fichier invalide"
+    echo "'$1' is not a valid file"
   fi
 }
-# Random password generator (8 caractères par défaut)
-genpasswd() 
+
+function mk() {  # mk: Create a new directory and enter it
+    mkdir -pv "$@" && cd "$@" || exit
+}
+
+function cl () {  # cs: Run cd and ls at once: {{{1
+    cd "$@" && ls -F
+}
+
+# Random password generator (8 caractères by default)
+function genpasswd() 
 {
   date +%s | sha256sum | base64 | head -c$1 ;echo
 }
 
+function conda_switch() {
+    conda deactivate && conda activate "$1"
+}
+
+function path() {
+    echo "$PATH" | tr ':' '\n'
+}

@@ -1,36 +1,48 @@
-reset="\e[0m";
-bold="\e[1m";
-clean="\e[2m";
-black="\e[30m";
-blue="\e[34m";
-cyan="\e[36m";
-green="\e[32m";
-orange="\e[33m";
-purple="\e[35m";
-red="\e[31m";
-violet="\e[35m";
-white="\e[37m";
-yellow="\e[33m";
+new_line='\n'
 
-function prompt_git_and_status() 
-{
+ # Based on https://github.com/mathiasbynens/dotfiles/blob/main/.bash_prompt
+function prompt_git() {
+
     local ps1_exit=$?
-    local branchName='';
-
     if [ $ps1_exit -eq 0 ]; then
         ps1_status="${3}"
     else
         ps1_status="${4}"
     fi
 
+    local s='';
+    local branchName='';
+
     # Check if the current directory is in a Git repository.
-    if [ $(git rev-parse --is-inside-work-tree &>/dev/null; echo "${?}") == '0' ]; then
+    isIn_A_gitRepo=$(git rev-parse --is-inside-work-tree &>/dev/null; echo "${?}")
+    if [ "${isIn_A_gitRepo}" == '0' ]; 
+    then
+        branchName="$(git symbolic-ref --quiet --short HEAD 2> /dev/null || \
+            git describe --all --exact-match HEAD 2> /dev/null || \
+            git rev-parse --short HEAD 2> /dev/null || \
+            echo '(unknown)')";
 
-        dirty=$(git diff --quiet --ignore-submodules HEAD &>/dev/null; [ $? -eq 1 ]&& echo -e "*")
-        branchName=`git symbolic-ref -q --short HEAD`
+        # Check for uncommitted changes in the index.
+        if ! $(git diff --quiet --ignore-submodules --cached); then
+            s+="${CYANBOLD}+";
+        fi;
+        # Check for unstaged changes.
+        if ! $(git diff-files --quiet --ignore-submodules --); then
+            s+="${BOLD}${LIGHT_RED}!";
+        fi;
+        # Check for untracked files.
+        if [ -n "$(git ls-files --others --exclude-standard)" ]; then
+            s+="${BOLD}${SALMON}?";
+        fi;
+        # Check for stashed files.
+        if $(git rev-parse --verify refs/stash &>/dev/null); then
+            s+="${BOLD}${BROWN}$";
+        fi;
 
-        printf "%s" "${1}${branchName}${2}${dirty} "
-    fi;
+        [ -n "${s}" ] && s=" ${WHITEBOLD}[${s}${WHITEBOLD}]";
+
+        echo -en "${1}${branchName}${2}${s}${RESET}";
+    fi
     printf "\n%s" "${ps1_status}#"
 }
 
@@ -46,53 +58,53 @@ function prompt_status(){
 }
 
 function use_prompt(){
-    PS1="\$(prompt_status \"\[${green}\]\" \"\[${red}\]\")"; # Git repository details and $
+    PS1="\$(prompt_status \"\[${GREEN}\]\" \"\[${LIGHT_RED}\]\")"; # Git repository details and $
     PS1+="\[${reset}\] ";
 }
 
 function use_simple_prompt(){
    PS1="\[\#\] "
-   PS1+="\[${violet}\]\u"
+   PS1+="\[${PURPLE}\]\u"
    PS1+="\[${reset}\]@"
    PS1+="\[${yellow}\]\h"
-   PS1+="\$(prompt_status \"\[${green}\]\" \"\[${red}\]\")"; # Git repository details and $
+   PS1+="\$(prompt_status \"\[${GREEN}\]\" \"\[${LIGHT_RED}\]\")"; # Git repository details and $
    PS1+="\[${reset}\] ";
 }
 
 function use_the_simpliest_prompt(){
-    PS1="\[${cyan}\#\] ";
+    PS1="\[${CYAN}\#\] ";
     PS1+="\[${yellow}\]\W/\] "; # working directory base name
-    PS1+="\$(prompt_status \"\[${green}\]\" \"\[${red}\]\" \"${new_line}\")"; # Git repository details and $
+    PS1+="\$(prompt_status \"\[${GREEN}\]\" \"\[${LIGHT_RED}\]\" \"${new_line}\")"; # Git repository details and $
     PS1+=" \[${reset}\]"; # and reset color
 }
 
 function use_the_simpliest_prompt_with_git(){
-    PS1="\[${cyan}\#\] ";
+    PS1="\[${CYAN}\#\] ";
     PS1+="\[${yellow}\]\W/\]"; # working directory base name
-    PS1+="\$(prompt_git_and_status \"\[${white}\] on \[${cyan}\]\" \"\[${red}\]\" \"\[${white}\]\" \"\[${red}\]\")"; # Git repository details and $    
+    PS1+="\$(prompt_git \"\[${WHITE}\] on \[${CYAN}\]\" \"\[${LIGHT_RED}\]\" \"\[${WHITE}\]\" \"\[${LIGHT_RED}\]\")"; # Git repository details and $    
     PS1+=" \[${reset}\]"; # and reset color
 }
 
 function use_root_user_prompt(){
     PS1="\[\#\] ";
-    PS1+="\[${violet}\]\u"; # username
-    PS1+="\[${white}\]@";
+    PS1+="\[${PURPLE}\]\u"; # username
+    PS1+="\[${WHITE}\]@";
     PS1+="\[${yellow}\]\h"; # host
-    PS1+="\[${white}\]:";
-    PS1+="\[${cyan}\] \w"; # working directory full path
-    PS1+="\[${white}\]\n\\$"
+    PS1+="\[${WHITE}\]:";
+    PS1+="\[${CYAN}\] \w"; # working directory full path
+    PS1+="\[${WHITE}\]\n\\$"
     PS1+=" \[${reset}\]"; # and reset color
 }
 
 function use_root_user_prompt_with_git(){
     PS1="\[\#\] ";
-    PS1+="\[${violet}\]\u"; # username
-    PS1+="\[${white}\]@";
-    PS1+="\[${red}\]\h"; # host
-    PS1+="\[${white}\]:";
-    PS1+="\[${green}\]\w"; # working directory full path
-    PS1+="\$(prompt_git_and_status \"\[${white}\] on \[${cyan}\]\" \"\[${red}\]\" \"\[${white}\]\" \"\[${red}\]\")"; # Git repository details and $
-    PS1+=" \[${reset}\]"; # and reset color
+    PS1+="\[${SIMPLERED}\]\u"; # username
+    PS1+="\[${WHITE}\] at ";
+    PS1+="\[${LIGHTBLUEBOLD}\]\h"; # host
+    PS1+="\[${WHITE}\]:";
+    PS1+="\[${SALMON}\]\w"; # working directory full path
+    PS1+="\$(prompt_git \"\[${WHITE}\] on \[${SOFT_GRAY}\]\" \"\[${LIGHT_RED}\]\" \"\[${WHITE}\]\" \"\[${LIGHT_RED}\]\")"; # Git repository details and $
+    PS1+=" \[${RESET}\]"; # and reset color
 }
 
 if [ "$UID" -eq 0 ]
@@ -104,3 +116,6 @@ then
     # use_root_user_prompt
     use_root_user_prompt_with_git
 fi
+
+export PS1;
+export PS2="\001${CYANBOLD}\002  ...:\001$RESET\002 ";
