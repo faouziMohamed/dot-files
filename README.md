@@ -53,6 +53,6 @@ This repository is under [MIT](LICENSE) license
 
 Suggestions and improvements are [welcome](https://github.com/faouziMohamed/Dot-files/issues)
 
-### Thanks to...
+### Thanks...
 
 * Especially for [Mathisbynens](https://github.com/mathiasbynens/dotfiles)'s dot-files repo and many others.
