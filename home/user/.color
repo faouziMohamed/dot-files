@@ -20,6 +20,7 @@
 
 export RESET="\033[0m"
 export BOLD="\033[1m"
+export ITALIC="\033[3m"
 
 # Foreground
 export BLACK="\033[0;30m"
@@ -49,13 +50,15 @@ export yellow="\e[38;5;214m"
 export GREEN="\e[38;5;71m"
 export GREENBOLD="\e[1;38;5;71m"
 export LIGHTBLUEBOLD="\e[1;38;5;74m"
-export SOFT_GRAY="\e[1;38;5;109m"
+export SOFT_GRAY="\e[38;5;109m"
+export SOFT_GRAYBOLD="\e[1;38;5;109m"
 export UGREEN="\e[38;5;71;1;4m"
 export SALMON="\e[38;5;167m"
 export SALMONBOLD="\e[1;38;5;168m"
 export BROWN="\e[38;5;166m"
 export BROWNBOLD="\e[1;38;5;166m"
-export SIMPLERED="\e[1;38;5;168m"
+export SIMPLERED="\e[38;5;168m"
+export SIMPLEREDBOLD="\e[1;38;5;168m"
 
 
 # Background
