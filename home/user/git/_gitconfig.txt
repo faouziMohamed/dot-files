@@ -5,7 +5,7 @@ core.editor,        nano
 init.defaultBranch, main
 pull.ff,            only
 rerere.enabled,     true
-commit.gpgSign,     false
+commit.gpgSign,     true
 color.ui,           auto
 alias.cancel,       reset --hard HEAD^
 alias.unstage,      reset HEAD
