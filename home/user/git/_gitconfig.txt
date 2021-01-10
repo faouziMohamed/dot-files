@@ -1,0 +1,24 @@
+user.name,          'Faouzi Mohamed'
+user.email,         '57812398+faouziMohamed@users.noreply.github.com'
+credential.helper,  'store'
+core.editor,        'nano'
+init.defaultBranch, 'main'
+pull.ff,            'only'
+rerere.enabled,     'true'
+commit.gpgSign,     'false'
+color.ui,           'auto'
+alias.cancel,       reset --hard HEAD^
+alias.unstage,      reset HEAD
+alias.graph,        log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ci) %C(bold blue)<%an>%Creset'
+alias.ckt,          checkout
+alias.stt,          status
+alias.sst,          status -s
+alias.sh,           stash
+alias.a,            add
+alias.cm,           commit
+alias.cma,          commit --amend
+alias.cmm,          commit -m
+alias.cmam,         commit --amend -m
+alias.pl,           pull
+alias.ps,           push
+alias.ls,           ls-files
