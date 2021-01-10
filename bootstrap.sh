@@ -35,7 +35,6 @@ function install_copy() {
   [ -f "git_config.sh" ] && bash "git_config.sh" "${1}" "${2}"
   # shellcheck disable=SC1090
   source ~/.bash_profile
-  # exec "$SHELL"
 }
 
 function main() {
