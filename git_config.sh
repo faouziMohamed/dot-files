@@ -6,18 +6,17 @@ prettify=true
 # Reading script arguments expected : -q|--quiet | -n| --no-prettify
 # -q|--quiet : Remove script output
 # -n| --no-prettify : Remove output colors
-
 if [[ $# -gt 0 ]]; then
   while [ $1 ]; do
     case $1 in
       -*)
         case $1 in # -n depends in -q to be used
           -q | --quiet)
-            echo $1
             verbose=false
             break
             ;;
           -n | --no-prettify) prettify=false ;;
+          -v | --verbose) ;;
           *)
             echo "$(basename "$0") : '$1' Unknown argument"
             sleep 1

@@ -1,12 +1,12 @@
-user.name,          'Faouzi Mohamed'
-user.email,         '57812398+faouziMohamed@users.noreply.github.com'
-credential.helper,  'store'
-core.editor,        'nano'
-init.defaultBranch, 'main'
-pull.ff,            'only'
-rerere.enabled,     'true'
-commit.gpgSign,     'false'
-color.ui,           'auto'
+user.name,          Faouzi Mohamed
+user.email,         57812398+faouziMohamed@users.noreply.github.com
+credential.helper,  store
+core.editor,        nano
+init.defaultBranch, main
+pull.ff,            only
+rerere.enabled,     true
+commit.gpgSign,     false
+color.ui,           auto
 alias.cancel,       reset --hard HEAD^
 alias.unstage,      reset HEAD
 alias.graph,        log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ci) %C(bold blue)<%an>%Creset'
