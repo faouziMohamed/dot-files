@@ -60,7 +60,6 @@ export BROWNBOLD="\e[1;38;5;166m"
 export SIMPLERED="\e[38;5;168m"
 export SIMPLEREDBOLD="\e[1;38;5;168m"
 
-
 # Background
 export BGBLACK="\033[0;40m"
 export BGBLACKBOLD="\033[1;40m"
