@@ -7,7 +7,7 @@ prettify=''
 force=''
 
 if [[ $# -gt 0 ]]; then
-  while [ $1 ]; do
+  while [ "$1" ]; do
     case $1 in
       -*)
         case $1 in # -n depends in -q to be used
@@ -30,7 +30,8 @@ git pull origin main
 
 # Or Install using symlink ?? not a very good idea
 function install_copy() {
-  rsync -avh --exclude "home/user/git" home/user/ test/
+  rsync -avh --exclude-from='.rsync_ignore' home/user/ ~
+
   [ -f "git_config.sh" ] && bash "git_config.sh" "${1}" "${2}"
   # shellcheck disable=SC1090
   source ~/.bash_profile
