@@ -62,7 +62,7 @@ This repository is under [MIT](LICENSE) license
 Suggestions and improvements are [welcome](https://github.com/faouziMohamed/Dot-files/issues)  
 
 ## <^>
-Don't forget to give a star if you like and if you want more cool stuff for your dotfiles you can visit this github repo ([Mathisbynens](https://github.com/mathiasbynens/dotfiles)) to find more awesome stuff.
+Don't forget to give a star if you like and if you want more cool stuff for your dotfiles you can visit this github repo ([mathiasbynens/dotfiles](https://github.com/mathiasbynens/dotfiles)) to find more awesome stuff.
 ## Thanks...
 
-* Especially for [Mathisbynens](https://github.com/mathiasbynens/dotfiles)'s dot-files repo and many others.
+* Especially for [Mathisbynens](https://github.com/mathiasbynens)'s dot-files repo and many others.
