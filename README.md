@@ -57,10 +57,12 @@ set -- -f; source bootstrap.sh
 
 This repository is under [MIT](LICENSE) license
 
-### Feedback 
+## Feedback 
 
-Suggestions and improvements are [welcome](https://github.com/faouziMohamed/Dot-files/issues)
+Suggestions and improvements are [welcome](https://github.com/faouziMohamed/Dot-files/issues)  
 
-### Thanks...
+## <^>
+Don't forget to give a star if you like and if you want more cool stuff for your dotfiles you can visit this github repo ([Mathisbynens](https://github.com/mathiasbynens/dotfiles)) to find more awesome stuff.
+## Thanks...
 
 * Especially for [Mathisbynens](https://github.com/mathiasbynens/dotfiles)'s dot-files repo and many others.
