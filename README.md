@@ -12,20 +12,19 @@ My personal dot-files in Ubuntu and WSL(on windows)
 </p>   
 
 ## Installation  
-  
-------------------------
+
 ### Warning  
 - If you want to give these dot-files a try, you ***should first fork this repository, review the code, and remove things  you don’t want or need***. Don’t blindly use my settings unless you know  what that entails. Use at your own risk!
 
 - You probably don't need to sign your git commits using my git `user.name` and `user.email`, though.   
-For that you must either remove or edit these two first lines in the [home/user/git/_gitconfig.txt](home/user/git/_gitconfig.txt) file changing the name here `Faouzi Mohamed` by the name youn want and changing the email `57812398+faouziMohamed@users.noreply.github.com` replacing by the your.
+For that you must either remove or edit these two first lines in the [home/user/git/_gitconfig.txt](home/user/git/_gitconfig.txt) file changing the name here `Faouzi Mohamed` by the name you want and changing the email `57812398+faouziMohamed@users.noreply.github.com` replacing by the your.
 ```bash
  1|  user.name,  Faouzi Mohamed
  2|  user.email, 57812398+faouziMohamed@users.noreply.github.com
 ..|  ...
 ```
-------------------------
-
+_________________________
+### Installation steps 
 * You can clone the repository wherever you want.
 * The bootstrapper script will pull in the latest version and copy the files to your home folder using `rsync` command.
 
@@ -34,8 +33,6 @@ Before install make sure that `rsync` is installed :
 ```bash
 sudo apt install rsync
 ```
-
-### Steps
 
 Clone the repository wherever you want or download the repository in zip format.
 
