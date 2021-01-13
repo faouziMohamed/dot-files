@@ -6,7 +6,7 @@
   </a>
  </p>  
 
-My personal dot-files in Ubuntu and WSL(on windows)  
+My personal dot-files in Ubuntu, android termux and WSL(on windows)  
 <p align="left">
     <img src='images/preview.png' alt='Preview with git status' height='400'>
 </p>   
@@ -37,12 +37,12 @@ sudo apt install rsync
 Clone the repository wherever you want or download the repository in zip format.
 
 ```bash
-git clone git@github.com:faouziMohamed/Dot-files.git
+git clone git@github.com:faouziMohamed/dot-files.git
 # Or
-git clone https://github.com/faouziMohamed/Dot-files.git
+git clone https://github.com/faouziMohamed/dot-files.git
 ```
 ```bash
-cd Dot-files
+cd dot-files
 chmod +x bootstrap.sh
 source bootstrap.sh
 ```
