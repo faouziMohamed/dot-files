@@ -33,9 +33,17 @@ function prompt_git() {
 
     # Check for uncommitted changes in the index.
     if ! (git diff --quiet --ignore-submodules --cached); then
-      __number_of_newly_staged="$(git status --short | grep --count '^[AM]')"
-      __count_print+="${CYANBOLD}${__number_of_newly_staged} "
-      __stats+="${CYANBOLD}+"
+      __number_of_newly_staged="$(git status --short | grep --count '^[AMR]')"
+      if [[ "${__number_of_newly_staged}" -gt 0 ]]; then
+        __count_print+="${CYANBOLD}${__number_of_newly_staged} "
+        __stats+="${CYANBOLD}+"
+      fi
+
+      __number_of_staged_delete="$(git status --short | grep --count '^[D]')"
+      if [[ "${__number_of_staged_delete}" -gt 0 ]]; then
+        __count_print+="${YELLOW}-${__number_of_staged_delete} "
+        __stats+="${YELLOW}-"
+      fi
     fi
     # Check for unstaged changes.
     if ! (git diff-files --quiet --ignore-submodules); then
