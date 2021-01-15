@@ -2,7 +2,7 @@
 # 30m - Black
 # 31m - Red
 # 32m - Green
-# 33m - Yellow
+# 33m - YELLOW_
 # 34m - Blue
 # 35m - Purple
 # 36m - Cyan
@@ -10,7 +10,7 @@
 # 40m - Background Black
 # 41m - Background Red
 # 42m - Background Green
-# 43m - Background Yellow
+# 43m - Background YELLOW_
 # 44m - Background Blue
 # 45m - Background Purple
 # 46m - Background Cyan
@@ -46,7 +46,7 @@ export LIGHT_REDBOLD="\e[1;91m"
 export ORANGE="\e[38;5;208m"
 export ORANGEBOLD="\e[1;38;5;208m"
 # Different shade
-export yellow="\e[38;5;214m"
+export SIMPLE_BOLD_YELLOW="\e[38;5;214m"
 export GREEN="\e[38;5;71m"
 export GREENBOLD="\e[1;38;5;71m"
 export LIGHTBLUEBOLD="\e[1;38;5;74m"
