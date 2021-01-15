@@ -41,8 +41,8 @@ function prompt_git() {
 
       __number_of_staged_delete="$(git status --short | grep --count '^[D]')"
       if [[ "${__number_of_staged_delete}" -gt 0 ]]; then
-        __count_print+="${YELLOW}-${__number_of_staged_delete} "
-        __stats+="${YELLOW}-"
+        __count_print+="${SIMPLE_BOLD_YELLOW}-${__number_of_staged_delete} "
+        __stats+="${SIMPLE_BOLD_YELLOW}-"
       fi
     fi
     # Check for unstaged changes.
@@ -52,7 +52,7 @@ function prompt_git() {
       __stats+="${BOLD}${LIGHT_RED}!"
     fi
     # Check for untracked files.
-    if [ -n "$(git status --short | grep '^??')" ]; then
+    if git status --short | grep --quiet '^??'; then
       __number_of_untracked="$(git status -s | grep --count '^??')"
       __count_print+="${BOLD}${SALMON}${__number_of_untracked} "
       __stats+="${BOLD}${SALMON}?"
@@ -101,14 +101,14 @@ function use_simple_prompt() {
   PS1="\[\#\] "
   PS1+="\[${BOLD}${BLUE}\]\u"
   PS1+="\[${RESET}\]@"
-  PS1+="\[${yellow}\]\h"
+  PS1+="\[${YELLOW}\]\h"
   PS1+="\$(prompt_status \"\[${GREEN}\]\" \"\[${LIGHT_RED}\]\")" # Git repository details and $
   PS1+="\[${RESET}\] "
 }
 function use_the_simpliest_prompt() {
   # Set the terminal title to the current working directory.
   PS1="\[${CYAN}\#\] "
-  PS1+="\[${yellow}\]\W/\] "                                                     # working directory base name
+  PS1+="\[${YELLOW}\]\W/\] "                                                     # working directory base name
   PS1+="\$(prompt_status \"\[${GREEN}\]\" \"\[${LIGHT_RED}\]\" \"${new_line}\")" # Git repository details and $
   PS1+=" \[${RESET}\]"                                                           # and RESET color
 }
@@ -116,7 +116,7 @@ function use_the_simpliest_prompt() {
 function use_the_simpliest_prompt_with_git() {
   # Set the terminal title to the current working directory.
   PS1="\[${CYAN}\#\] "
-  PS1+="\[${yellow}\]\W/\] "                                                                                                     # working directory base name
+  PS1+="\[${YELLOW}\]\W/\] "                                                                                                     # working directory base name
   PS1+="\$(prompt_git \"\[${WHITEBOLD}\] on \[${YELLOWBOLD}\]\" \"\[${LIGHT_REDBOLD}\]\" \"\[${GREEN}\]\" \"\[${LIGHT_RED}\]\")" # Git repository details and $
   PS1+=" \[${RESET}\]"                                                                                                           # and RESET color
 }
