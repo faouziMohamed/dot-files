@@ -76,6 +76,12 @@ function prompt_git() {
       __stats="${WHITEBOLD}[${__stats}${WHITEBOLD}]"
       __stats=" ${__stats}-->${__count_print}"
     }
+
+    # TODO: Show diff of commit count of the current branch 
+    # with a remote branch if exists (Only if the git repo is not dirty)
+    if [ -z "${__stats}" ] ;then 
+        #__stats="${GREEN} ✓${WHITEBOLD} » ${REDBOLD}X";fi
+        __stats="${LIGHTBLUEBOLD} ✓";fi
     echo -en "${1}${branchName}${2}${__stats}${RESET}"
   fi
   printf "\n%s" "${ps1_status}\$"
