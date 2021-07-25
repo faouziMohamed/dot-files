@@ -31,6 +31,20 @@ export GREP_COLORS="ms=01;38;5;202:mc=01;31:sl=:cx=:fn=01;38;5;132:ln=32:bn=32:s
 # colored GCC warnings and errors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
+command $(pip list 2>/dev/null | grep rich --quiet) || pip install rich &>/dev/null 
+if [ ! -e ~/.pythonstartup ];then 
+
+cat <<EOF > ~/.pythonstartup 
+from rich import pretty
+from rich.console import Console
+pretty.install()
+console = Console()
+EOF
+
+fi
+
+export PYTHONSTARTUP=~/.pythonstartup
+
 # {{
 # Why assign and export separately: see https://github.com/koalaman/shellcheck/wiki/SC2155
 LESS_TERMCAP_mb=$(printf '\e[01;31m')       # enter blinking mode – red

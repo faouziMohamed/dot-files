@@ -30,6 +30,7 @@ alias p="cd ~/projects"
 
 # apt
 alias     apt="sudo apt"
+alias apt-clean='apt autoclean; apt autopurge -y; apt autoremove -y'
 alias    dpkg="sudo dpkg"
 alias     maj="apt update && apt full-upgrade -y"
 alias      up="apt update && apt full-upgrade -y"
@@ -66,7 +67,7 @@ alias shutdown="sudo shutdown"
 alias schmod='sudo chmod'
 
 # IP addresses
-alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias ipp="dig +short myip.opendns.com @resolver1.opendns.com"
 alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
 alias interfaces='ifconfig -s'
 
