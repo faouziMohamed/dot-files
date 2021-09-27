@@ -1,4 +1,12 @@
-new_line='\n'
+NEW_LINE='\n'
+# AT='👻'
+# AT='😷'
+AT=' 🧛 '
+SHELL_SYMBOL='$'
+if [ "$UID" -eq 0 ]; then
+  AT=' 💀 '
+  SHELL_SYMBOL='#'
+fi
 
 # Based on https://github.com/mathiasbynens/dotfiles/blob/main/.bash_prompt
 function prompt_git() {
@@ -84,7 +92,7 @@ function prompt_git() {
         __stats="${LIGHTBLUEBOLD} ✓";fi
     echo -en "${1}${branchName}${2}${__stats}${RESET}"
   fi
-  printf "\n%s" "${ps1_status}\$"
+  printf "\n%s" "${ps1_status}${SHELL_SYMBOL}"
 }
 
 function prompt_status() {
@@ -95,7 +103,7 @@ function prompt_status() {
   else
     ps1_status="${2}"
   fi
-  printf "${3}%s" "${ps1_status}\$"
+  printf "${3}%s" "${ps1_status}${SHELL_SYMBOL}"
 }
 
 function use_prompt() {
@@ -107,15 +115,16 @@ function use_simple_prompt() {
   PS1="\[\#\] "
   PS1+="\[${BOLD}${BLUE}\]\u"
   PS1+="\[${RESET}\]@"
-  PS1+="\[${YELLOW}\]\h"
+  PS1+="\[${YELLOW}\]\h\[${RESET}\]"
   PS1+="\$(prompt_status \"\[${GREEN}\]\" \"\[${LIGHT_RED}\]\")" # Git repository details and $
   PS1+="\[${RESET}\] "
 }
 function use_the_simpliest_prompt() {
   # Set the terminal title to the current working directory.
   PS1="\[${CYAN}\#\] "
-  PS1+="\[${YELLOW}\]\W/\] "                                                     # working directory base name
-  PS1+="\$(prompt_status \"\[${GREEN}\]\" \"\[${LIGHT_RED}\]\" \"${new_line}\")" # Git repository details and $
+  WORKNIG_PATH="\[${YELLOW}\]\w"
+  PS1+="\[${RESET}\][${WORKNIG_PATH}\[${RESET}\]]" # working directory base name
+  PS1+="\$(prompt_status \"\[${GREEN}\]\" \"\[${LIGHT_RED}\]\" \"${NEW_LINE}\")" # Git repository details and $
   PS1+=" \[${RESET}\]"                                                           # and RESET color
 }
 
@@ -134,32 +143,38 @@ function use_normal_user_prompt() {
   PS1+="\[${WHITE}\]@"
   PS1+="\[${LIGHT_RED}\]\h" # host
   PS1+="\[${WHITE}\]:"
-  PS1+="\[${GREEN}\] \w" # working directory full path
-  PS1+="\[${CYAN}\]\n\\$"
+  PS1+="\[${RESET}\]"
+  WORKNIG_PATH="\[${YELLOW}\]\w"
+  PS1+="\[${RESET}\][${WORKNIG_PATH}\[${RESET}\]]"   # working directory full path
+  PS1+="\[${CYAN}\]\n${SHELL_SYMBOL}"
   PS1+=" \[${RESET}\]" # and RESET color
 }
 
 function use_normal_user_prompt_with_git() {
-  PS1="\[${WHITEBOLD}\]"
-  PS1+="[\#] "
+  PS1="\[${WHITEBOLD}\]┌──"
+  # PS1+="[\#] "
   PS1+="\[${CYANBOLD}\]\u" # username
-  PS1+="\[${GRAYBOLD}\] at "
+  PS1+="${AT}"
+  # PS1+="\[${GRAYBOLD}\] at "
   PS1+="\[${RESET}\]"
   PS1+="\[${BOLD}${LIGHT_RED}\]\h" # host
   PS1+="\[${GRAYBOLD}\]:"
   PS1+="\[${RESET}\]"
-  PS1+="\[${GREENBOLD}\]\w"                                                                                                      # working directory full path
+  WORKNIG_PATH="\[${YELLOW}\]\w"
+  PS1+="\[${RESET}\][${WORKNIG_PATH}\[${RESET}\]]"                                                                                                      # working directory full path
   PS1+="\$(prompt_git \"\[${WHITEBOLD}\] on \[${YELLOWBOLD}\]\" \"\[${LIGHT_REDBOLD}\]\" \"\[${GREEN}\]\" \"\[${LIGHT_RED}\]\")" # Git repository details and $
   PS1+="\[${RESET}\] "                                                                                                           # and RESET color
 }
 
-if [ "$UID" -ge 0 ]; then
+
+
+# if [ "$UID" -ge 0 ]; then
   # use_prompt
   # use_simple_prompt
   # use_the_simpliest_prompt
   # use_the_simpliest_prompt_with_git
   # use_normal_user_prompt
   use_normal_user_prompt_with_git
-fi
+# fi
 export PS1
 export PS2="\001${CYANBOLD}\002  ...:\001$RESET\002 "
