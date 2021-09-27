@@ -12,15 +12,15 @@
 # -F: Quit automatically if one screen
 
 export PAGER="less -JRKMLigF"
-export LESSHISTSIZE=5000 # default is 100
+export LESSHISTSIZE=500000 # default is 100
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 export HISTCONTROL=ignoreboth
 # export HISTTIMEFORMAT="%F %T: "
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-export HISTSIZE=9000
-export HISTFILESIZE=3000
+export HISTSIZE=900000
+export HISTFILESIZE=300000
 export HISTIGNORE='exit:ls:cd:history:ll:la:gs'
 export HISTFILE="$HOME/.bash_history"
 
