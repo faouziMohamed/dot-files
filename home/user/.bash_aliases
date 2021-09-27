@@ -57,8 +57,9 @@ alias igrep="grep -i"
 
 # Shell
 alias echo='echo -e'
-alias reload="exec $SHELL -l"
 alias cls='clear'
+alias reload="exec $SHELL -l"
+alias creload="cls; reload"
 
 # sudo commands
 alias sudo='sudo '
@@ -68,7 +69,7 @@ alias schmod='sudo chmod'
 
 # IP addresses
 alias ipp="dig +short myip.opendns.com @resolver1.opendns.com"
-alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
+alias ips="ipp;ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
 alias interfaces='ifconfig -s'
 
 # size
